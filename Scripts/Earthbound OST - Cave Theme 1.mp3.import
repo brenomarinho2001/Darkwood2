@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dv0ovbok2rmug"
+path="res://.godot/imported/Earthbound OST - Cave Theme 1.mp3-6436aedbb2dd30ec0862d0de1ea136fb.mp3str"
+
+[deps]
+
+source_file="res://Scripts/Earthbound OST - Cave Theme 1.mp3"
+dest_files=["res://.godot/imported/Earthbound OST - Cave Theme 1.mp3-6436aedbb2dd30ec0862d0de1ea136fb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

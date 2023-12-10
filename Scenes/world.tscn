@@ -1,0 +1,256 @@
+[gd_scene load_steps=20 format=3 uid="uid://cwpssovlhsj7v"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_ebje4"]
+[ext_resource type="Shader" path="res://Scenes/world.gdshader" id="1_fq8so"]
+[ext_resource type="Texture2D" uid="uid://br28e351ewawd" path="res://cozinha.png" id="1_v358q"]
+[ext_resource type="Texture2D" uid="uid://e2fjvcg3ptal" path="res://pernas.png" id="2_0yjaf"]
+[ext_resource type="Script" path="res://Scripts/Cozinha.gd" id="3_hrbii"]
+[ext_resource type="Script" path="res://Scripts/corpo.gd" id="4_fuhup"]
+[ext_resource type="Texture2D" uid="uid://cb5jwredm5bf3" path="res://corpo.png" id="4_vs5ep"]
+[ext_resource type="Texture2D" uid="uid://kdae3iwuj5o8" path="res://cabeça.png" id="6_7v8q2"]
+[ext_resource type="Texture2D" uid="uid://bv1vn2i7yxb6u" path="res://animation_running.png" id="7_wfahx"]
+[ext_resource type="Texture2D" uid="uid://4bqa3wpaxvxv" path="res://light.jpg" id="8_1fiwr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6i5nl"]
+shader = ExtResource("1_fq8so")
+shader_parameter/dir = Vector2(0, 0)
+shader_parameter/quality = 1
+
+[sub_resource type="Animation" id="Animation_30i2n"]
+length = 0.001
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.0731481, 0.0731481)]
+}
+
+[sub_resource type="Animation" id="Animation_8kfv2"]
+resource_name = "legs_running"
+length = 1.71
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.5, 0.9, 1.1, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 3, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.7, 1, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 0.8, 1, 1.2, 1.3, 1.6),
+"transitions": PackedFloat32Array(0.091508, 0.091508, 0.091508, 0.091508, 0.091508, 0.091508, 0.091508, 0.091508),
+"update": 0,
+"values": [Vector2(0.079, 0.079), Vector2(0.076, 0.076), Vector2(0.076, 0.076), Vector2(0.079, 0.079), Vector2(0.079, 0.079), Vector2(0.076, 0.076), Vector2(0.076, 0.076), Vector2(0.079, 0.079)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eojs3"]
+_data = {
+"RESET": SubResource("Animation_30i2n"),
+"legs_running": SubResource("Animation_8kfv2")
+}
+
+[sub_resource type="Animation" id="Animation_536n6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_xcr8h"]
+resource_name = "animations"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wva7l"]
+_data = {
+"RESET": SubResource("Animation_536n6"),
+"animations": SubResource("Animation_xcr8h")
+}
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8cfli"]
+polygon = PackedVector2Array(717, 279, 710, 277, 706, 240, 626, 239, 626, 274, 458, 273, 456, 241, 384, 243, 383, 266, 405, 271, 410, 355, 385, 352, 384, 384, 666, 382, 667, 416, 706, 415, 708, 344, 716, 346, 718, 426, 371, 425, 371, 230, 718, 231)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0aun4"]
+polygon = PackedVector2Array(477, 303, 462, 302, 455, 295, 457, 293, 457, 289, 435, 307, 437, 310, 440, 308, 449, 315, 449, 331, 452, 338, 465, 344, 477, 344, 487, 332, 496, 332, 501, 332, 501, 336, 507, 334, 505, 313, 502, 313, 502, 316, 488, 314)
+
+[node name="World" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -824.0
+offset_top = -320.0
+offset_right = 984.0
+offset_bottom = 496.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Cozinha" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_6i5nl")
+position = Vector2(544, 328)
+scale = Vector2(0.179745, 0.179745)
+texture = ExtResource("1_v358q")
+script = ExtResource("3_hrbii")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(852, 364)
+script = ExtResource("1_ebje4")
+
+[node name="pernas" type="Sprite2D" parent="Player"]
+visible = false
+position = Vector2(8, 0)
+rotation = 1.5708
+scale = Vector2(0.063, 0.063)
+texture = ExtResource("2_0yjaf")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/pernas"]
+libraries = {
+"": SubResource("AnimationLibrary_eojs3")
+}
+playback_default_blend_time = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(0, -1)
+rotation = -1.5708
+scale = Vector2(0.0731481, 0.0731481)
+texture = ExtResource("4_vs5ep")
+script = ExtResource("4_fuhup")
+
+[node name="Cabeca" type="Sprite2D" parent="Player/Sprite2D"]
+scale = Vector2(0.962025, 0.924051)
+texture = ExtResource("6_7v8q2")
+
+[node name="Marker2D" type="Marker2D" parent="Player/Sprite2D"]
+position = Vector2(-12.6582, -101.266)
+rotation = 1.5708
+scale = Vector2(2.27526, 2.27526)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Player"]
+position = Vector2(2, -1)
+polygon = PackedVector2Array(-12, 7, -6, 14, 7, 12, 7, -12, 0, -16, -11, -9)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2, 2)
+
+[node name="Running" type="Sprite2D" parent="Player"]
+visible = false
+position = Vector2(1, -1)
+rotation = -1.5708
+scale = Vector2(0.073, 0.073)
+texture = ExtResource("7_wfahx")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Running"]
+libraries = {
+"": SubResource("AnimationLibrary_wva7l")
+}
+
+[node name="mainlight" type="PointLight2D" parent="Player"]
+shadow_enabled = true
+texture = ExtResource("8_1fiwr")
+
+[node name="Marker2D" type="Marker2D" parent="Player"]
+position = Vector2(41, 0)
+
+[node name="TimerFumaca" type="Timer" parent="Player"]
+wait_time = 0.2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(456, 240, 456, 272, 624, 272, 624, 240, 704, 240, 712, 280, 720, 272, 720, 232, 368, 232, 368, 424, 720, 424, 720, 344, 704, 344, 704, 416, 664, 416, 664, 384, 384, 384, 384, 352, 408, 352, 408, 264, 384, 264, 384, 240)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D"]
+occluder = SubResource("OccluderPolygon2D_8cfli")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="StaticBody2D"]
+occluder = SubResource("OccluderPolygon2D_0aun4")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(469, 323)
+polygon = PackedVector2Array(-20, -8, -28, -15, -32, -13, -33, -17, -12, -35, -13, -28, -7, -21, 0, -22, 9, -20, 14, -15, 19, -8, 30, -8, 33, -7, 34, -10, 36, -10, 36, -6, 37, 12, 33, 12, 33, 9, 19, 8, 17, 10, 12, 19, 8, 22, 0, 24, -5, 22, -13, 18, -18, 13, -21, 8, -19, 1)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.27451, 0.27451, 0.27451, 1)
+
+[connection signal="timeout" from="Player/TimerFumaca" to="Player" method="_on_timer_fumaca_timeout"]

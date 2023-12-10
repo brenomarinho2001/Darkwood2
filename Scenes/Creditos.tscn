@@ -1,0 +1,108 @@
+[gd_scene load_steps=9 format=3 uid="uid://teg7jo1sgosv"]
+
+[ext_resource type="Script" path="res://Scripts/Creditos.gd" id="1_8q780"]
+[ext_resource type="FontFile" uid="uid://bkfgkn8sqajwf" path="res://Aliens Among Us.ttf" id="2_jfiai"]
+[ext_resource type="FontFile" uid="uid://diybji35qfgd4" path="res://upheavtt.ttf" id="3_bi4ki"]
+[ext_resource type="Shader" path="res://Scenes/fumacastartgame.gdshader" id="5_ddtcw"]
+[ext_resource type="Texture2D" uid="uid://c4o2dl5srgx7t" path="res://icon.png" id="6_ctonf"]
+
+[sub_resource type="FontVariation" id="FontVariation_fy2x8"]
+base_font = ExtResource("3_bi4ki")
+
+[sub_resource type="FontVariation" id="FontVariation_uptr3"]
+base_font = ExtResource("2_jfiai")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8twa"]
+shader = ExtResource("5_ddtcw")
+shader_parameter/range = 0.0
+shader_parameter/noiseQuality = 0.1
+shader_parameter/noiseIntensity = -0.000999995
+shader_parameter/offsetIntensity = -0.1
+shader_parameter/colorOffsetIntensity = 0.444
+
+[node name="StartGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8q780")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Creditos2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1104.0
+offset_top = -61.0
+offset_right = -34.0
+offset_bottom = -33.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_fonts/font = SubResource("FontVariation_fy2x8")
+theme_override_font_sizes/font_size = 30
+text = "enter para entrar em contato com cada criador / ESC para voltar "
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -237.5
+offset_top = -88.0
+offset_right = 237.5
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titulo" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_uptr3")
+theme_override_font_sizes/font_size = 60
+text = "equipe:"
+
+[node name="Comecar" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_fy2x8")
+theme_override_font_sizes/font_size = 30
+text = "brenomarinho2001 ( programador )"
+
+[node name="Opcoes" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_fy2x8")
+theme_override_font_sizes/font_size = 30
+text = "GUILHERME ( GAMEDESIGNER )"
+
+[node name="Creditos" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_fy2x8")
+theme_override_font_sizes/font_size = 30
+text = "luís saraiva ( artista )"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_a8twa")
+position = Vector2(597, 324)
+scale = Vector2(19.4219, 11.0781)
+texture = ExtResource("6_ctonf")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.984314, 0.552941, 0.654902, 1)

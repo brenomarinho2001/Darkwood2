@@ -1,0 +1,118 @@
+[gd_scene load_steps=10 format=3 uid="uid://c82ah4w7g6l7v"]
+
+[ext_resource type="Script" path="res://Scripts/Opcoes.gd" id="1_o3wxg"]
+[ext_resource type="FontFile" uid="uid://diybji35qfgd4" path="res://upheavtt.ttf" id="2_wo8hs"]
+[ext_resource type="FontFile" uid="uid://bkfgkn8sqajwf" path="res://Aliens Among Us.ttf" id="3_s0shr"]
+[ext_resource type="Shader" path="res://Scenes/fumacastartgame.gdshader" id="4_kavgt"]
+[ext_resource type="Texture2D" uid="uid://c4o2dl5srgx7t" path="res://icon.png" id="5_h1v6a"]
+[ext_resource type="AudioStream" uid="uid://dv0ovbok2rmug" path="res://Scripts/Earthbound OST - Cave Theme 1.mp3" id="6_2ab8v"]
+
+[sub_resource type="FontVariation" id="FontVariation_fy2x8"]
+base_font = ExtResource("2_wo8hs")
+
+[sub_resource type="FontVariation" id="FontVariation_uptr3"]
+base_font = ExtResource("3_s0shr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8twa"]
+shader = ExtResource("4_kavgt")
+shader_parameter/range = 0.0
+shader_parameter/noiseQuality = 0.1
+shader_parameter/noiseIntensity = -0.000999995
+shader_parameter/offsetIntensity = -0.1
+shader_parameter/colorOffsetIntensity = 0.444
+
+[node name="OPCOES" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o3wxg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Creditos2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1104.0
+offset_top = -61.0
+offset_right = -34.0
+offset_bottom = -33.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_fonts/font = SubResource("FontVariation_fy2x8")
+theme_override_font_sizes/font_size = 30
+text = "ESC para voltar "
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -237.5
+offset_top = -88.0
+offset_right = 237.5
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titulo" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_uptr3")
+theme_override_font_sizes/font_size = 60
+text = "opcoes"
+
+[node name="Comecar" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = SubResource("FontVariation_fy2x8")
+theme_override_font_sizes/font_size = 30
+text = "VOLUME GERAL:"
+
+[node name="Opcoes" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = SubResource("FontVariation_fy2x8")
+theme_override_font_sizes/font_size = 30
+text = "LINGUAGEM: ( NO FUTURO )"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_a8twa")
+position = Vector2(597, 324)
+scale = Vector2(19.4219, 11.0781)
+texture = ExtResource("5_h1v6a")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.984314, 0.552941, 0.654902, 1)
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 573.0
+offset_top = 328.0
+offset_right = 811.0
+offset_bottom = 344.0
+min_value = -30.0
+max_value = 0.0
+tick_count = 10
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_2ab8v")
+autoplay = true
+
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]

@@ -1,0 +1,100 @@
+[gd_scene load_steps=11 format=3 uid="uid://dxrvd18fqopu0"]
+
+[ext_resource type="Shader" path="res://Scenes/fumacastartgame.gdshader" id="1_53knf"]
+[ext_resource type="FontFile" uid="uid://bkfgkn8sqajwf" path="res://Aliens Among Us.ttf" id="1_gjxja"]
+[ext_resource type="Script" path="res://Scripts/start_game.gd" id="1_p8vv3"]
+[ext_resource type="Texture2D" uid="uid://eic60egs5rqi" path="res://microondas.png" id="1_pt2qo"]
+[ext_resource type="FontFile" uid="uid://diybji35qfgd4" path="res://upheavtt.ttf" id="2_5rc0g"]
+[ext_resource type="Texture2D" uid="uid://c4o2dl5srgx7t" path="res://icon.png" id="3_c3mcy"]
+[ext_resource type="AudioStream" uid="uid://dv0ovbok2rmug" path="res://Scripts/Earthbound OST - Cave Theme 1.mp3" id="7_f4f3y"]
+
+[sub_resource type="FontVariation" id="FontVariation_uptr3"]
+base_font = ExtResource("1_gjxja")
+
+[sub_resource type="FontVariation" id="FontVariation_fy2x8"]
+base_font = ExtResource("2_5rc0g")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8twa"]
+shader = ExtResource("1_53knf")
+shader_parameter/range = 0.0
+shader_parameter/noiseQuality = 0.1
+shader_parameter/noiseIntensity = 0.001
+shader_parameter/offsetIntensity = -0.1
+shader_parameter/colorOffsetIntensity = 1.235
+
+[node name="StartGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p8vv3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 120.0
+offset_top = -88.0
+offset_right = 486.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titulo" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_uptr3")
+theme_override_font_sizes/font_size = 60
+text = "SAPIENSAUR"
+
+[node name="Comecar" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_fy2x8")
+theme_override_font_sizes/font_size = 30
+text = ">COMEÇAR"
+
+[node name="Opcoes" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_fy2x8")
+theme_override_font_sizes/font_size = 30
+text = "OPÇÕES"
+
+[node name="Creditos" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_fy2x8")
+theme_override_font_sizes/font_size = 30
+text = "CREDITOS"
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(379, 312)
+texture = ExtResource("1_pt2qo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_a8twa")
+position = Vector2(597, 324)
+scale = Vector2(19.4219, 11.0781)
+texture = ExtResource("3_c3mcy")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.984314, 0.552941, 0.654902, 1)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_f4f3y")
+autoplay = true
