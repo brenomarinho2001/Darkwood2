@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name  Player
 @onready var fumaca = preload('res://Scenes/fumaca.tscn')
 @export var speed = 100
-var rotation_speed = 15
+var rotation_speed = 20
 var andada = 0
 var moviment_direction: Vector2 = Vector2.ZERO
 var angle
@@ -17,10 +17,52 @@ func _physics_process(delta):
 	velocity = direction * speed
 	
 	
+		
 	
+	
+	#print(rotation_degrees)
+	#print(get_global_mouse_position())
 	if Input.is_action_pressed("ui_accept") and direction:
 		Global.player_correndo = true
+		
+		
+		# UP 
+		if Input.is_action_pressed("ui_up") and Input.is_action_pressed("ui_right"):
+			rotation_degrees = 45
+			pass
+		
+		elif Input.is_action_pressed("ui_up") and Input.is_action_pressed("ui_left"):
+			rotation_degrees = -45
+			pass
+		
+		elif Input.is_action_pressed("ui_up"):
+			rotation_degrees = 0
+		
+		#Down
+		
+		elif Input.is_action_pressed("ui_down") and Input.is_action_pressed("ui_right"):
+			rotation_degrees = -225
+			pass
+		
+		elif Input.is_action_pressed("ui_down") and Input.is_action_pressed("ui_left"):
+			rotation_degrees = 225
+			pass
+
+		elif Input.is_action_pressed("ui_down"):
+			rotation_degrees = 180
+			pass
+		elif Input.is_action_pressed("ui_right"):
+			rotation_degrees = 90
+		elif Input.is_action_pressed("ui_left"):
+			rotation_degrees = -90
+		
+
+		
 		if andada > 30:
+			
+			
+			
+			pass
 			
 			if correu == false:
 				
@@ -48,13 +90,13 @@ func _physics_process(delta):
 		
 	
 
-	angle = (global_position-get_global_mouse_position()).angle()
-	if angle:
-		global_rotation = lerp_angle(global_rotation,angle,delta*rotation_speed)
-	pass
+		angle = (global_position-get_global_mouse_position()).angle()
+		if angle:
+			global_rotation = lerp_angle(global_rotation,angle,delta*rotation_speed)
+		#pass
 	
 	if direction:
-		print($pernas.rotation)
+		#print($pernas.rotation)
 		
 		
 		

@@ -1,0 +1,235 @@
+[gd_scene load_steps=15 format=3 uid="uid://t6xv78l5o34f"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_x43t5"]
+[ext_resource type="Texture2D" uid="uid://e2fjvcg3ptal" path="res://pernas.png" id="2_l3jps"]
+[ext_resource type="Texture2D" uid="uid://cb5jwredm5bf3" path="res://corpo.png" id="3_7gjkf"]
+[ext_resource type="Script" path="res://Scripts/corpo.gd" id="4_nh8ke"]
+[ext_resource type="Texture2D" uid="uid://kdae3iwuj5o8" path="res://cabeça.png" id="5_j6aco"]
+[ext_resource type="Texture2D" uid="uid://bv1vn2i7yxb6u" path="res://animation_running.png" id="6_3jeje"]
+[ext_resource type="Texture2D" uid="uid://4bqa3wpaxvxv" path="res://light.jpg" id="7_p2iv0"]
+[ext_resource type="Script" path="res://Scripts/Pause.gd" id="8_r37au"]
+
+[sub_resource type="Animation" id="Animation_30i2n"]
+length = 0.001
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.0731481, 0.0731481)]
+}
+
+[sub_resource type="Animation" id="Animation_8kfv2"]
+resource_name = "legs_running"
+length = 1.71
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.5, 0.9, 1.1, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 3, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.7, 1, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 0.8, 1, 1.2, 1.3, 1.6),
+"transitions": PackedFloat32Array(0.091508, 0.091508, 0.091508, 0.091508, 0.091508, 0.091508, 0.091508, 0.091508),
+"update": 0,
+"values": [Vector2(0.079, 0.079), Vector2(0.076, 0.076), Vector2(0.076, 0.076), Vector2(0.079, 0.079), Vector2(0.079, 0.079), Vector2(0.076, 0.076), Vector2(0.076, 0.076), Vector2(0.079, 0.079)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eojs3"]
+_data = {
+"RESET": SubResource("Animation_30i2n"),
+"legs_running": SubResource("Animation_8kfv2")
+}
+
+[sub_resource type="Animation" id="Animation_536n6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_xcr8h"]
+resource_name = "animations"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wva7l"]
+_data = {
+"RESET": SubResource("Animation_536n6"),
+"animations": SubResource("Animation_xcr8h")
+}
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+script = ExtResource("1_x43t5")
+
+[node name="pernas" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(8, 0)
+rotation = 1.5708
+scale = Vector2(0.063, 0.063)
+texture = ExtResource("2_l3jps")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="pernas"]
+libraries = {
+"": SubResource("AnimationLibrary_eojs3")
+}
+playback_default_blend_time = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+rotation = -1.5708
+scale = Vector2(0.0731481, 0.0731481)
+texture = ExtResource("3_7gjkf")
+script = ExtResource("4_nh8ke")
+
+[node name="Cabeca" type="Sprite2D" parent="Sprite2D"]
+scale = Vector2(0.962025, 0.924051)
+texture = ExtResource("5_j6aco")
+
+[node name="Marker2D" type="Marker2D" parent="Sprite2D"]
+position = Vector2(-12.6582, -101.266)
+rotation = 1.5708
+scale = Vector2(2.27526, 2.27526)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(2, -1)
+polygon = PackedVector2Array(-12, 7, -6, 14, 7, 12, 7, -12, 0, -16, -11, -9)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Running" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1, -1)
+scale = Vector2(0.073, 0.073)
+texture = ExtResource("6_3jeje")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Running"]
+libraries = {
+"": SubResource("AnimationLibrary_wva7l")
+}
+
+[node name="mainlight" type="PointLight2D" parent="."]
+position = Vector2(-3, 0)
+rotation = 1.51844
+energy = 0.6
+shadow_enabled = true
+texture = ExtResource("7_p2iv0")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(3, 0)
+
+[node name="TimerFumaca" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="Label" type="Label" parent="."]
+offset_left = 13.0
+offset_top = -41.0
+offset_right = 53.0
+offset_bottom = -18.0
+
+[node name="Pause" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+script = ExtResource("8_r37au")
+
+[node name="ColorRect" type="ColorRect" parent="Pause"]
+offset_left = -32.0
+offset_top = -18.0
+offset_right = 1199.0
+offset_bottom = 693.0
+color = Color(0.196078, 0.196078, 0.196078, 0.803922)
+
+[node name="Label" type="Label" parent="Pause"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.0
+offset_top = -41.5
+offset_right = 87.0
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "Pause"
+
+[connection signal="timeout" from="TimerFumaca" to="." method="_on_timer_fumaca_timeout"]

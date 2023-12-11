@@ -5,10 +5,11 @@ var dir_y = randf_range(-.01,.01)
 var speed = 200
 
 func _ready():
+	visible = false
 	$Timer.start()
 	randomize()
 	z_index = -1
-	modulate.a = randf_range(.4,.9)
+	modulate.a = randf_range(.1,.4)
 	scale.x = randf_range(.3,1)
 	scale.y = randf_range(.3,1)
 
@@ -28,5 +29,6 @@ func excluir():
 
 
 func _on_timer_timeout():
+	visible = true
 	$AnimationPlayer.play("fumaca")
 	pass # Replace with function body.

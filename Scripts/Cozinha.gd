@@ -7,7 +7,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if Global.player_correndo == true:
 		material.set_shader_parameter( 'dir', Vector2(0.002,0.002) )
 	else:
