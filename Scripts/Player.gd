@@ -3,13 +3,15 @@ extends CharacterBody2D
 class_name  Player
 @onready var fumaca = preload('res://Scenes/fumaca.tscn')
 @export var speed = 100
-var rotation_speed = 20
+var rotation_speed = 15
 var andada = 0
 var moviment_direction: Vector2 = Vector2.ZERO
 var angle
 var direction
 
 var correu = false
+
+
 
 func _physics_process(delta):
 	direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -20,11 +22,15 @@ func _physics_process(delta):
 		
 	
 	
-	#print(rotation_degrees)
-	#print(get_global_mouse_position())
-	if Input.is_action_pressed("ui_accept") and direction:
+	print(rotation_degrees)
+	print(get_global_mouse_position())
+	
+	if Input.is_action_just_released("ui_accept"):
+		rotation_speed = 35
+	
+	if Input.is_action_pressed("ui_accept") and (direction or (Input.is_action_pressed("ui_right") and Input.is_action_pressed("ui_left")) or (Input.is_action_pressed("ui_up") and Input.is_action_pressed("ui_down"))):
 		Global.player_correndo = true
-		
+		$mainlight2.visible = false
 		
 		# UP 
 		if Input.is_action_pressed("ui_up") and Input.is_action_pressed("ui_right"):
@@ -80,14 +86,15 @@ func _physics_process(delta):
 		$Running.visible = true
 		$Running/AnimationPlayer.play("animations")
 	else:
+		rotation_speed = lerpf(rotation_speed,15,.1)
 		Global.player_correndo = false
 		$TimerFumaca.stop()
 		correu = false
 		speed = 100
 		$Running.visible = false
-		$pernas.visible = true
+		#$pernas.visible = true
 		$Sprite2D.visible = true
-		
+		$mainlight2.visible = true
 	
 
 		angle = (global_position-get_global_mouse_position()).angle()

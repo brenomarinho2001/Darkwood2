@@ -9,9 +9,9 @@ func _ready():
 	$Timer.start()
 	randomize()
 	z_index = -1
-	modulate.a = randf_range(.1,.4)
-	scale.x = randf_range(.3,1)
-	scale.y = randf_range(.3,1)
+	modulate.a = randf_range(.1,.2)
+	scale.x = randf_range(.1,.3)
+	scale.y = randf_range(.1,.3)
 
 func _process(_delta):
 	scale.x += .02

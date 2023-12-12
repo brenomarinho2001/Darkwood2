@@ -7,7 +7,7 @@ func _ready():
 	$HSlider.value = Global.volume
 	
 
-func _process(delta):
+func _process(_delta):
 	
 	Global.volume = $HSlider.value
 	

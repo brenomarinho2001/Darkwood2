@@ -1,25 +1,85 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2kqv0yib7qkx"]
+[gd_scene load_steps=10 format=3 uid="uid://d2kqv0yib7qkx"]
 
 [ext_resource type="Script" path="res://Scripts/Npc.gd" id="1_rc45i"]
-[ext_resource type="Texture2D" uid="uid://cansd7eglgsbl" path="res://npc.png" id="2_17s2j"]
+[ext_resource type="Texture2D" uid="uid://bfxxpi7ebresp" path="res://npc e prota.png" id="2_of80p"]
 [ext_resource type="Texture2D" uid="uid://4bqa3wpaxvxv" path="res://light.jpg" id="3_r24bt"]
+[ext_resource type="Texture2D" uid="uid://cp8tdtld1hp71" path="res://Scenes/CIRCULO.png" id="4_rlrap"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jklbp"]
 radius = 605.226
 
+[sub_resource type="Animation" id="Animation_d83ae"]
+resource_name = "respirando"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1.05)]
+}
+
+[sub_resource type="Animation" id="Animation_b1v7x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_p6mrw"]
+resource_name = "squash"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(0.0824704, 0.0824704, 0.0824704),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1), Vector2(1, 1.02)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o63ay"]
+_data = {
+"RESET": SubResource("Animation_b1v7x"),
+"respirando": SubResource("Animation_d83ae"),
+"squash": SubResource("Animation_p6mrw")
+}
+
 [node name="Npc" type="CharacterBody2D"]
 process_mode = 3
+z_index = -1
 scale = Vector2(0.073, 0.073)
 script = ExtResource("1_rc45i")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_17s2j")
+rotation = 3.14159
+texture = ExtResource("2_of80p")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
 polygon = PackedVector2Array(-123.287, 205.479, -136.985, 136.986, -191.78, 123.288, -232.876, 95.8906, -219.178, 82.1919, -260.273, 27.3975, -273.972, -27.3972, -260.273, -68.4932, -232.876, -82.1917, -219.178, -95.8904, -205.479, -123.288, -246.574, -123.288, -273.972, -150.685, -273.972, -178.082, -246.574, -205.479, -232.876, -205.479, -205.479, -205.479, -205.479, -232.877, 109.59, -232.877, 123.288, -205.479, 150.686, -191.781, 178.083, -191.781, 178.083, -150.685, 164.384, -123.288, 136.987, -109.589, 109.59, -123.288, 123.288, -82.1917, 150.686, -68.4932, 178.083, -54.7944, 178.083, 0, 178.083, 41.0959, 164.384, 82.1919, 136.987, 109.589, 123.288, 136.986, 68.4941, 136.986, 54.7949, 136.986, 41.0967, 178.082, 13.6992, 232.877, -27.3965, 260.274, -68.4922, 246.575, -95.8896, 232.877)
 
 [node name="mainlight" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(-3, 0)
 rotation = 1.51844
 shadow_enabled = true
@@ -62,6 +122,27 @@ offset_top = 374.0
 offset_right = 383.0
 offset_bottom = 416.0
 theme_override_font_sizes/font_size = 30
+
+[node name="Botao" type="Sprite2D" parent="."]
+z_index = 100
+position = Vector2(150.685, -54.7945)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_rlrap")
+
+[node name="Label" type="Label" parent="Botao"]
+offset_left = -47.9997
+offset_top = -120.0
+offset_right = 41.0003
+offset_bottom = 99.0002
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 26
+theme_override_font_sizes/font_size = 160
+text = "E"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_o63ay")
+}
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

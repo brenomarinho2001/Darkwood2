@@ -3,7 +3,7 @@ extends Control
 
 var estados = 'comecar'
 
-func _process(delta):
+func _process(_delta):
 	
 	match estados:
 		
