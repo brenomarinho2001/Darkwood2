@@ -1,0 +1,124 @@
+[gd_scene load_steps=7 format=3 uid="uid://cc7t7idl6thvi"]
+
+[ext_resource type="Script" path="res://dinossauro/Dinosauro.gd" id="1_fs0dj"]
+[ext_resource type="Texture2D" uid="uid://b7ibl2u4x06o4" path="res://Assets/Dinossauros/dinosauro.png" id="2_meuqb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qb7np"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_ck7md"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dinosauro/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_bakci"]
+resource_name = "anim"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dinosauro/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8jixm"]
+_data = {
+"RESET": SubResource("Animation_ck7md"),
+"anim": SubResource("Animation_bakci")
+}
+
+[node name="Dinosauro2" type="CharacterBody2D"]
+position = Vector2(-1238.89, 900)
+scale = Vector2(5.55556, 5.55556)
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_fs0dj")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qb7np")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-16, 13, -75.0797, -162.72, 80.2601, -161.46, 17, 0, 36, 39, -1, 57, -33, 40)
+
+[node name="markers" type="Node2D" parent="."]
+position = Vector2(2802, -570)
+
+[node name="1" type="Marker2D" parent="markers"]
+position = Vector2(-34, 209)
+
+[node name="2" type="Marker2D" parent="markers"]
+position = Vector2(100, 196)
+
+[node name="3" type="Marker2D" parent="markers"]
+position = Vector2(113, 288)
+
+[node name="4" type="Marker2D" parent="markers"]
+position = Vector2(-57, 315)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-10.0775, 12.1837)
+rotation = -1.55334
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_meuqb")
+hframes = 10
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8jixm")
+}
+
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D2"]
+scale = Vector2(1, 1)
+polygon = PackedVector2Array(6.2802, 29.34, -3.79979, 33.84, -10.6398, 21.78, -12.7998, 3.06, -3.79979, -17.64, 6.2802, -0.540009, 9.5202, 6.65999)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]

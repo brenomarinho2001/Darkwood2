@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://teg7jo1sgosv"]
 
 [ext_resource type="Script" path="res://Scripts/Creditos.gd" id="1_8q780"]
-[ext_resource type="FontFile" uid="uid://bkfgkn8sqajwf" path="res://Aliens Among Us.ttf" id="2_jfiai"]
-[ext_resource type="FontFile" uid="uid://diybji35qfgd4" path="res://upheavtt.ttf" id="3_bi4ki"]
+[ext_resource type="FontFile" uid="uid://bkfgkn8sqajwf" path="res://Fonts/Aliens Among Us.ttf" id="2_jfiai"]
+[ext_resource type="FontFile" uid="uid://diybji35qfgd4" path="res://Fonts/upheavtt.ttf" id="3_bi4ki"]
 [ext_resource type="Shader" path="res://Scenes/fumacastartgame.gdshader" id="5_ddtcw"]
 [ext_resource type="Texture2D" uid="uid://c4o2dl5srgx7t" path="res://icon.png" id="6_ctonf"]
 

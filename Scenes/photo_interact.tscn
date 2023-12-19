@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://sbe5slq6nqi1"]
+[gd_scene load_steps=11 format=3 uid="uid://sbe5slq6nqi1"]
 
 [ext_resource type="Script" path="res://Scripts/PhotoInteract.gd" id="1_7beqd"]
-[ext_resource type="Texture2D" uid="uid://8f3ptt6x6o5m" path="res://Scenes/enviremoentporta.jpg" id="2_5q6gc"]
-[ext_resource type="Texture2D" uid="uid://cp8tdtld1hp71" path="res://Scenes/CIRCULO.png" id="3_upf54"]
+[ext_resource type="Texture2D" uid="uid://8f3ptt6x6o5m" path="res://Assets/enviremoentporta.jpg" id="2_5q6gc"]
+[ext_resource type="FontFile" uid="uid://diybji35qfgd4" path="res://Fonts/upheavtt.ttf" id="2_vnve6"]
+[ext_resource type="Texture2D" uid="uid://cp8tdtld1hp71" path="res://Assets/CIRCULO.png" id="3_upf54"]
+[ext_resource type="Texture2D" uid="uid://cqqqq0ww5a3wt" path="res://Assets/lightpng.png" id="4_krbs1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lqfk1"]
 size = Vector2(46, 66.5)
@@ -96,6 +98,7 @@ _data = {
 }
 
 [node name="PhotoInteract" type="Area2D"]
+z_index = 1
 script = ExtResource("1_7beqd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -109,6 +112,19 @@ position = Vector2(578.711, 326.9)
 scale = Vector2(0.605741, 0.605741)
 texture = ExtResource("2_5q6gc")
 
+[node name="Label" type="Label" parent="CanvasLayer/Sprite2D"]
+z_index = 13
+offset_left = -912.454
+offset_top = 439.297
+offset_right = -657.454
+offset_bottom = 519.297
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_constants/shadow_outline_size = 11
+theme_override_fonts/font = ExtResource("2_vnve6")
+theme_override_font_sizes/font_size = 60
+text = "ESC PARA VOLTAR"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
 libraries = {
 "": SubResource("AnimationLibrary_4wbb0")
@@ -116,7 +132,7 @@ libraries = {
 
 [node name="Botao" type="Sprite2D" parent="."]
 position = Vector2(13, -10)
-scale = Vector2(0.0746528, 0.0746528)
+scale = Vector2(0.06, 0.06)
 texture = ExtResource("3_upf54")
 
 [node name="Label" type="Label" parent="Botao"]
@@ -129,5 +145,15 @@ theme_override_constants/outline_size = 26
 theme_override_font_sizes/font_size = 160
 text = "E"
 
+[node name="PointLight2D" type="PointLight2D" parent="Botao"]
+scale = Vector2(0.8, 0.8)
+blend_mode = 2
+texture = ExtResource("4_krbs1")
+texture_scale = 1.49
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

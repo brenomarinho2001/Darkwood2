@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvkft6q85epfx"]
+
+[ext_resource type="Script" path="res://DinossauroProjeot/Pathfinding/Enemy.gd" id="1_qveic"]
+[ext_resource type="Texture2D" uid="uid://c4tqwptx3auv" path="res://DinossauroProjeot/Pathfinding/Scenes/dinossauro.png" id="2_6oxr2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y5erb"]
+size = Vector2(24, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jk2a4"]
+size = Vector2(83, 62)
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("nav_agent") groups=["DINOESCURO"]]
+collision_layer = 2
+collision_mask = 4
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_qveic")
+nav_agent = NodePath("Navigation/NavigationAgent2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("2_6oxr2")
+hframes = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 4)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_y5erb")
+
+[node name="Navigation" type="Node2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation"]
+avoidance_enabled = true
+neighbor_distance = 1000.0
+max_neighbors = 30
+time_horizon_obstacles = 1.0
+max_speed = 15949.1
+debug_enabled = true
+debug_path_custom_point_size = 10.0
+
+[node name="RecalculateTimer" type="Timer" parent="Navigation"]
+wait_time = 0.2
+autostart = true
+
+[node name="Aggro" type="Node2D" parent="."]
+
+[node name="AggroRange" type="Area2D" parent="Aggro"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Aggro/AggroRange"]
+polygon = PackedVector2Array(-11, -4, 176, -48, 176, 48, -9, 15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Aggro/AggroRange"]
+visible = false
+position = Vector2(-0.5, 6)
+shape = SubResource("RectangleShape2D_jk2a4")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Aggro/AggroRange"]
+position = Vector2(-0.5, 6)
+shape = SubResource("RectangleShape2D_jk2a4")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Navigation/RecalculateTimer" to="." method="_on_recalculate_timer_timeout"]
+[connection signal="area_entered" from="Aggro/AggroRange" to="." method="_on_aggro_range_area_entered"]
+[connection signal="area_exited" from="Aggro/AggroRange" to="." method="_on_aggro_range_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

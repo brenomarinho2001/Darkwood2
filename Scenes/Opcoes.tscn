@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://c82ah4w7g6l7v"]
 
 [ext_resource type="Script" path="res://Scripts/Opcoes.gd" id="1_o3wxg"]
-[ext_resource type="FontFile" uid="uid://diybji35qfgd4" path="res://upheavtt.ttf" id="2_wo8hs"]
-[ext_resource type="FontFile" uid="uid://bkfgkn8sqajwf" path="res://Aliens Among Us.ttf" id="3_s0shr"]
+[ext_resource type="FontFile" uid="uid://diybji35qfgd4" path="res://Fonts/upheavtt.ttf" id="2_wo8hs"]
+[ext_resource type="FontFile" uid="uid://bkfgkn8sqajwf" path="res://Fonts/Aliens Among Us.ttf" id="3_s0shr"]
 [ext_resource type="Shader" path="res://Scenes/fumacastartgame.gdshader" id="4_kavgt"]
 [ext_resource type="Texture2D" uid="uid://c4o2dl5srgx7t" path="res://icon.png" id="5_h1v6a"]
-[ext_resource type="AudioStream" uid="uid://dv0ovbok2rmug" path="res://Scripts/Earthbound OST - Cave Theme 1.mp3" id="6_2ab8v"]
+[ext_resource type="AudioStream" uid="uid://dv0ovbok2rmug" path="res://Sounds/Earthbound OST - Cave Theme 1.mp3" id="6_2ab8v"]
 
 [sub_resource type="FontVariation" id="FontVariation_fy2x8"]
 base_font = ExtResource("2_wo8hs")

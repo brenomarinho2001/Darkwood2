@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=3 uid="uid://dxrvd18fqopu0"]
 
 [ext_resource type="Shader" path="res://Scenes/fumacastartgame.gdshader" id="1_53knf"]
-[ext_resource type="FontFile" uid="uid://bkfgkn8sqajwf" path="res://Aliens Among Us.ttf" id="1_gjxja"]
+[ext_resource type="FontFile" uid="uid://bkfgkn8sqajwf" path="res://Fonts/Aliens Among Us.ttf" id="1_gjxja"]
 [ext_resource type="Script" path="res://Scripts/start_game.gd" id="1_p8vv3"]
-[ext_resource type="Texture2D" uid="uid://eic60egs5rqi" path="res://microondas.png" id="1_pt2qo"]
-[ext_resource type="FontFile" uid="uid://diybji35qfgd4" path="res://upheavtt.ttf" id="2_5rc0g"]
+[ext_resource type="Texture2D" uid="uid://eic60egs5rqi" path="res://Assets/microondas.png" id="1_pt2qo"]
+[ext_resource type="FontFile" uid="uid://diybji35qfgd4" path="res://Fonts/upheavtt.ttf" id="2_5rc0g"]
 [ext_resource type="Texture2D" uid="uid://c4o2dl5srgx7t" path="res://icon.png" id="3_c3mcy"]
-[ext_resource type="AudioStream" uid="uid://dv0ovbok2rmug" path="res://Scripts/Earthbound OST - Cave Theme 1.mp3" id="7_f4f3y"]
+[ext_resource type="AudioStream" uid="uid://dv0ovbok2rmug" path="res://Sounds/Earthbound OST - Cave Theme 1.mp3" id="7_f4f3y"]
 
 [sub_resource type="FontVariation" id="FontVariation_uptr3"]
 base_font = ExtResource("1_gjxja")

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkniks7vtmhw0"]
+
+[ext_resource type="Script" path="res://Dinosauro.gd" id="1_bx0u2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qb7np"]
+size = Vector2(16, 16)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_vrjd3"]
+vertices = PackedVector2Array(182, -56, 163, 88, -179, 40, -111, -105, 1, -106)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(4, -117, 194, -64, 172, 100, -194, 49, -118, -115)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[node name="Node" type="Node"]
+
+[node name="Dinosauro" type="CharacterBody2D" parent="."]
+script = ExtResource("1_bx0u2")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Dinosauro"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dinosauro"]
+shape = SubResource("RectangleShape2D_qb7np")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_vrjd3")

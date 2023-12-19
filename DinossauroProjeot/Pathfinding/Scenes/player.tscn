@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://bg3tusjcglqs7"]
+
+[ext_resource type="Script" path="res://DinossauroProjeot/Pathfinding/player.gd" id="1_wc0wg"]
+[ext_resource type="Texture2D" uid="uid://b4u5uiek4hwmf" path="res://icon.svg" id="2_rhhbh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dcyt5"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_saql6"]
+radius = 184.0
+
+[sub_resource type="Animation" id="Animation_mbrn5"]
+resource_name = "andando"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pt3go"]
+_data = {
+"andando": SubResource("Animation_mbrn5")
+}
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_wc0wg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dcyt5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_rhhbh")
+
+[node name="Area2D" type="Area2D" parent="." groups=["Player"]]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_saql6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pt3go")
+}

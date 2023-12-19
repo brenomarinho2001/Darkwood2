@@ -14,8 +14,8 @@ func _ready():
 	scale.y = randf_range(.1,.3)
 
 func _process(_delta):
-	scale.x += .02
-	scale.y += .02
+	scale.x -= .001
+	scale.y -= .001
 	modulate.a -= .001
 	rotation_degrees += .1
 	position.x += dir_x * speed/2

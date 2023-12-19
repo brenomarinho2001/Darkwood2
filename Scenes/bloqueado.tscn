@@ -1,0 +1,165 @@
+[gd_scene load_steps=18 format=3 uid="uid://hiwhnbj7mskk"]
+
+[ext_resource type="Texture2D" uid="uid://cvjua3omg68o6" path="res://Assets/BOLADI.png" id="1_oj34g"]
+[ext_resource type="Texture2D" uid="uid://db8p27ajl7ghf" path="res://Assets/escmbro cozinha.png" id="2_noanw"]
+[ext_resource type="Script" path="res://Scenes/Desafio.gd" id="3_0p8gp"]
+[ext_resource type="Texture2D" uid="uid://h5ru61gshs5s" path="res://Assets/botao.png" id="3_pelks"]
+[ext_resource type="Texture2D" uid="uid://bhj28ia0qu8om" path="res://Assets/seta.png" id="5_kt1b4"]
+[ext_resource type="Texture2D" uid="uid://c1aki3evdqras" path="res://Assets/orb.png" id="6_ynwcj"]
+[ext_resource type="Texture2D" uid="uid://cqqqq0ww5a3wt" path="res://Assets/lightpng.png" id="7_5j5ix"]
+[ext_resource type="Shader" path="res://Scenes/bloqueado.gdshader" id="8_844j1"]
+[ext_resource type="Texture2D" uid="uid://cncptkcwh6dlf" path="res://Assets/setaluz.png" id="8_soh8o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g1yqr"]
+radius = 35.0143
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6gjaj"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3v5vx"]
+light_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s1lml"]
+radius = 53.0377
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vp5d"]
+shader = ExtResource("8_844j1")
+shader_parameter/mask_texture = ExtResource("8_soh8o")
+
+[sub_resource type="Animation" id="Animation_m8j13"]
+resource_name = "mascara"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"excluir"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_rq3kl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ycn7"]
+_data = {
+"RESET": SubResource("Animation_rq3kl"),
+"mascara": SubResource("Animation_m8j13")
+}
+
+[node name="Bloqueado" type="StaticBody2D"]
+disable_mode = 1
+
+[node name="Botao" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(31, -14)
+scale = Vector2(0.422422, 0.422422)
+texture = ExtResource("1_oj34g")
+
+[node name="Label" type="Label" parent="Botao"]
+offset_left = -28.4076
+offset_top = -42.6114
+offset_right = 404.592
+offset_bottom = 176.389
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 26
+theme_override_font_sizes/font_size = 20
+text = "SHIFT"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_g1yqr")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_6gjaj")
+position = Vector2(-103, -0.999996)
+scale = Vector2(0.131496, 0.131496)
+texture = ExtResource("2_noanw")
+
+[node name="Desafio" type="Node2D" parent="."]
+process_mode = 3
+position = Vector2(-29, -32)
+script = ExtResource("3_0p8gp")
+
+[node name="fundo" type="Sprite2D" parent="Desafio"]
+modulate = Color(1, 1, 1, 0.341176)
+texture = ExtResource("3_pelks")
+
+[node name="Seta" type="Sprite2D" parent="Desafio"]
+material = SubResource("CanvasItemMaterial_3v5vx")
+position = Vector2(-1, -2)
+texture = ExtResource("5_kt1b4")
+hframes = 4
+
+[node name="PointLight2D" type="PointLight2D" parent="Desafio/Seta"]
+z_index = 200
+blend_mode = 2
+texture = ExtResource("8_soh8o")
+
+[node name="Area2D" type="Area2D" parent="Desafio"]
+position = Vector2(29, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Desafio/Area2D"]
+position = Vector2(-7, 0)
+shape = SubResource("CircleShape2D_s1lml")
+
+[node name="Portal" type="Node2D" parent="Desafio"]
+position = Vector2(29, 32)
+
+[node name="mainlight" type="PointLight2D" parent="Desafio/Portal"]
+z_index = 100
+position = Vector2(0.371806, 0.677477)
+rotation = -1.28733
+scale = Vector2(1.11719, 1.05242)
+color = Color(1, 1, 0.941176, 1)
+energy = 16.0
+blend_mode = 2
+range_layer_min = 100
+shadow_enabled = true
+texture = ExtResource("7_5j5ix")
+texture_scale = 0.3
+
+[node name="Portal" type="Sprite2D" parent="Desafio/Portal"]
+modulate = Color(0.952198, 0.952198, 0.952198, 1)
+material = SubResource("ShaderMaterial_5vp5d")
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("6_ynwcj")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Desafio/Portal"]
+libraries = {
+"": SubResource("AnimationLibrary_8ycn7")
+}
+
+[connection signal="body_entered" from="Desafio/Area2D" to="Desafio" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Desafio/Area2D" to="Desafio" method="_on_area_2d_body_exited"]

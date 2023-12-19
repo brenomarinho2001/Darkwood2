@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://df2iakd2tnwo0"]
+
+[ext_resource type="Script" path="res://Scripts/Sprite2D.gd" id="1_i6unf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yrbes"]
+size = Vector2(819.444, 438.888)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uo0d4"]
+size = Vector2(1184.4, 1025.6)
+
+[node name="TextureRoom" type="Sprite2D"]
+z_index = -10
+scale = Vector2(0.18, 0.18)
+script = ExtResource("1_i6unf")
+
+[node name="AreaAparecer" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaAparecer"]
+position = Vector2(14.5, 0)
+shape = SubResource("RectangleShape2D_yrbes")
+
+[node name="AreaSumir" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaSumir"]
+position = Vector2(14.5, 24)
+shape = SubResource("RectangleShape2D_uo0d4")
+
+[connection signal="body_entered" from="AreaAparecer" to="." method="_on_area_aparecer_body_entered"]
+[connection signal="body_entered" from="AreaSumir" to="." method="_on_area_sumir_body_entered"]

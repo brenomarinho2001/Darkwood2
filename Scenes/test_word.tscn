@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx4ea8wp2aj03"]
+
+[ext_resource type="PackedScene" uid="uid://t6xv78l5o34f" path="res://Scenes/player.tscn" id="1_ev435"]
+[ext_resource type="PackedScene" uid="uid://b4hwi3eagk4sa" path="res://Scenes/dinossauro_01.tscn" id="2_qr05h"]
+
+[node name="TestWord" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_ev435")]
+position = Vector2(563, 345)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -5
+offset_right = 1162.0
+offset_bottom = 647.0
+
+[node name="Dinossauro01" parent="." instance=ExtResource("2_qr05h")]
+position = Vector2(523, 298)
+
+[editable path="Player"]

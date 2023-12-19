@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkniks7vtmhw0"]
+
+[ext_resource type="Script" path="res://dinossauro/Dinosauro.gd" id="1_bx0u2"]
+[ext_resource type="Texture2D" uid="uid://b7ibl2u4x06o4" path="res://Assets/Dinossauros/dinosauro.png" id="2_w8a6u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qb7np"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_bakci"]
+resource_name = "anim"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dinosauro/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_ck7md"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dinosauro/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8jixm"]
+_data = {
+"RESET": SubResource("Animation_ck7md"),
+"anim": SubResource("Animation_bakci")
+}
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_vrjd3"]
+vertices = PackedVector2Array(182, -56, 163, 88, -179, 40, -111, -105, 1, -106)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-50, -215, 233, -217, 230, 387, -9, 378, -7, 403, -93, 407, -92, 388, -263, 385, -257, -217)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[node name="Node" type="Node"]
+
+[node name="Dinosauro" type="CharacterBody2D" parent="."]
+script = ExtResource("1_bx0u2")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Dinosauro"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dinosauro"]
+shape = SubResource("RectangleShape2D_qb7np")
+
+[node name="Sprite2D" type="Sprite2D" parent="Dinosauro"]
+position = Vector2(-10.0775, 12.1837)
+rotation = -1.55334
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_w8a6u")
+hframes = 10
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Dinosauro"]
+libraries = {
+"": SubResource("AnimationLibrary_8jixm")
+}
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_vrjd3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

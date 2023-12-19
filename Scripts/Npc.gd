@@ -4,15 +4,21 @@ var entrou = false
 @export var interagivel = false
 @export var respirando = false
 @export var squash = false
+@export var dialogo = false
 @export var fala = [
 	{
 		'name':'Gabriel',
-		'dialogo':'Olá tudo bom?',
+		'dialogo':'Ah não.. o Gonçales usou as peças da maquina do tempo cara..',
 		'img':'',
 	},
 	{
 		'name':'Gabriel',
-		'dialogo':'eu sou gabriel e sou novo no laboratorio',
+		'dialogo':'isso deve ter bagunçado tudo...',
+		'img':'',
+	},
+	{
+		'name':'Gabriel',
+		'dialogo':'preciso encontrar uma saida, mas antes é melhor levar o microondas já que ele é uma maquina do tempo.',
 		'img':'',
 	}
 ]
@@ -20,7 +26,10 @@ var entrou = false
 var i = 0
 var falar = true
 
+@export var excluir = false
 func _ready():
+	
+
 	
 	if fala[i].name == '':
 		$CanvasLayer/Name.visible = false
@@ -40,15 +49,25 @@ func _ready():
 		$Botao.visible = false
 
 func _process(_delta):
+	
+	if excluir:
+		queue_free()
+	
 	if interagivel:
-		if entrou:
+		
+		if entrou and falar:
 			$Botao.visible = true
 		else:
 			$Botao.visible = false
 
 		
-		print($CanvasLayer/Label.visible_characters)
-		if entrou and Input.is_action_just_pressed("ui_e"):
+		#print($CanvasLayer/Label.visible_characters)
+		if (entrou and Input.is_action_just_pressed("ui_e")) or dialogo:
+			interagivel = true
+			$CanvasLayer/ColorRect.visible = true
+			$CanvasLayer/ColorRect2.visible = true
+			$CanvasLayer/Label.visible = true
+			$CanvasLayer/Name.visible = true
 			get_tree().paused = true
 			$CanvasLayer/Label.visible_characters = 0
 			$CanvasLayer.visible = true
@@ -56,7 +75,7 @@ func _process(_delta):
 				#$CanvasLayer/Label.visible_characters +=1
 				$CanvasLayer/Name.text = fala[i].name
 				$CanvasLayer/Label.text = fala[i].dialogo
-				print(fala[i].dialogo)
+				#print(fala[i].dialogo)
 			else:
 				$CanvasLayer/Label.text = ''	
 				get_tree().paused = false

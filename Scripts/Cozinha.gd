@@ -6,10 +6,3 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	if Global.player_correndo == true:
-		material.set_shader_parameter( 'dir', Vector2(0.001,0.001) )
-	else:
-		material.set_shader_parameter( 'dir', Vector2(0,0) )
-	pass

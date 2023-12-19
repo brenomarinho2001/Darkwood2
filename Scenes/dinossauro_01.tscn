@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4hwi3eagk4sa"]
+
+[ext_resource type="Script" path="res://Scripts/dinossauro_01.gd" id="1_3v7tc"]
+[ext_resource type="Texture2D" uid="uid://b7ibl2u4x06o4" path="res://Assets/Dinossauros/dinosauro.png" id="1_qkacv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pnlfv"]
+radius = 20.025
+
+[sub_resource type="Animation" id="Animation_5yqxa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_e2pnf"]
+resource_name = "run"
+length = 1.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kg4d2"]
+_data = {
+"RESET": SubResource("Animation_5yqxa"),
+"run": SubResource("Animation_e2pnf")
+}
+
+[node name="Dinossauro01" type="CharacterBody2D"]
+z_index = 2
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_3v7tc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_pnlfv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("1_qkacv")
+hframes = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kg4d2")
+}
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

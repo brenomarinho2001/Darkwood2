@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=3 uid="uid://2c1c4tmh2ocm"]
+
+[ext_resource type="Texture2D" uid="uid://dfkurr2j1gyh2" path="res://DinossauroProjeot/Pathfinding/Scenes/serra (1).png" id="1_ch0r8"]
+[ext_resource type="Script" path="res://Scripts/cerras.gd" id="1_t6eai"]
+[ext_resource type="Texture2D" uid="uid://b86iw1wpipnwu" path="res://DinossauroProjeot/Pathfinding/Scenes/serra.png" id="2_2hjyo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_renfa"]
+radius = 18.0
+
+[sub_resource type="Animation" id="Animation_hlcu5"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_12r4q"]
+resource_name = "new_animation"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("corrente:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(9, -3), Vector2(9, -3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("serra:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-0.999996, 1), Vector2(90, 1), Vector2(-90, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("serra:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_44lp2"]
+_data = {
+"RESET": SubResource("Animation_hlcu5"),
+"new_animation": SubResource("Animation_12r4q")
+}
+
+[node name="Cerras" type="Node2D"]
+rotation = 1.5708
+script = ExtResource("1_t6eai")
+
+[node name="corrente" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-5.31642e-05, -3)
+scale = Vector2(0.19, 0.19)
+texture = ExtResource("1_ch0r8")
+
+[node name="serra" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(49, 0.999823)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_2hjyo")
+
+[node name="Area2D" type="Area2D" parent="serra"]
+position = Vector2(723.688, 453.232)
+rotation = -2.62893
+scale = Vector2(10, 10)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="serra/Area2D"]
+position = Vector2(85.2416, 4.03205)
+rotation = 2.09406
+scale = Vector2(1, 1)
+shape = SubResource("CircleShape2D_renfa")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_44lp2")
+}
+autoplay = "new_animation"
+
+[connection signal="body_entered" from="serra/Area2D" to="." method="_on_area_2d_body_entered"]
